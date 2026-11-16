@@ -1,26 +1,25 @@
 "use strict";
 const q = it => encodeURIComponent(`${it.title} ${it.author || ''}`.trim());
 const L = {
-  apple:   it => ({ l:'Apple Books', d:'books.apple.com', u: it.url }),
-  applepod:it => ({ l:'Apple Podcasts', d:'podcasts.apple.com', u: it.url }),
-  amazon:  it => ({ l:'Amazon', d:'amazon.com', u:`https://www.amazon.com/s?k=${q(it)}&i=stripbooks` }),
-  amazonAu:it => ({ l:'Amazon', d:'amazon.com', u:`https://www.amazon.com/s?k=${q(it)}&i=audible` }),
-  audible: it => ({ l:'Audible', d:'audible.com', u:`https://www.audible.com/search?keywords=${q(it)}` }),
-  goodreads:it=> ({ l:'Goodreads', d:'goodreads.com', u:`https://www.goodreads.com/search?q=${q(it)}` }),
-  gbooks:  it => ({ l:'Google Books', d:'books.google.com', u:`https://www.google.com/books?q=${q(it)}` }),
-  spotify: it => ({ l:'Spotify', d:'spotify.com', u:`https://open.spotify.com/search/${q(it)}` }),
-  youtube: it => ({ l:'YouTube', d:'youtube.com', u:`https://www.youtube.com/results?search_query=${q(it)}${''}` }),
-  ytpod:   it => ({ l:'YouTube', d:'youtube.com', u:`https://www.youtube.com/results?search_query=${encodeURIComponent((it.title||'') + ' podcast')}` }),
-  amzmusic:it => ({ l:'Amazon Music', d:'music.amazon.com', u:`https://music.amazon.com/search/${q(it)}` }),
-  libro:   it => ({ l:'Libro.fm', d:'libro.fm', u:`https://libro.fm/search?q=${q(it)}` }),
+  apple:   it => ({ l:'Apple Books', s:'Apple', d:'books.apple.com', u: it.url }),
+  applepod:it => ({ l:'Apple Podcasts', s:'Apple', d:'podcasts.apple.com', u: it.url }),
+  amazon:  it => ({ l:'Amazon', s:'Amazon', d:'amazon.com', u:`https://www.amazon.com/s?k=${q(it)}&i=stripbooks` }),
+  amazonAu:it => ({ l:'Amazon', s:'Amazon', d:'amazon.com', u:`https://www.amazon.com/s?k=${q(it)}&i=audible` }),
+  audible: it => ({ l:'Audible', s:'Audible', d:'audible.com', u:`https://www.audible.com/search?keywords=${q(it)}` }),
+  goodreads:it=> ({ l:'Goodreads', s:'Goodreads', d:'goodreads.com', u:`https://www.goodreads.com/search?q=${q(it)}` }),
+  gbooks:  it => ({ l:'Google Books', s:'Google', d:'books.google.com', u:`https://www.google.com/books?q=${q(it)}` }),
+  spotify: it => ({ l:'Spotify', s:'Spotify', d:'spotify.com', u:`https://open.spotify.com/search/${q(it)}` }),
+  ytpod:   it => ({ l:'YouTube', s:'YouTube', d:'youtube.com', u:`https://www.youtube.com/results?search_query=${encodeURIComponent((it.title||'') + ' podcast')}` }),
+  amzmusic:it => ({ l:'Amazon Music', s:'Amazon', d:'music.amazon.com', u:`https://music.amazon.com/search/${q(it)}` }),
 };
+// Every tab shows its links on two lines of two (the full name on wide screens, a short name on phones)
 const SOURCES = [
   { k:'books', l:'Books', imgClass:'books', hint:'Position on Apple’s Top Paid Books chart', empty:'books', metricName:'Apple Ranking',
     links:[[L.amazon, L.gbooks], [L.apple, L.goodreads]] },
   { k:'audiobooks', l:'Audio Books', imgClass:'audiobooks', hint:'Position on Apple’s Top Audiobooks chart', empty:'audio books', metricName:'Apple Ranking',
-    links:[[L.audible, L.apple, L.amazonAu, L.spotify, L.libro]] },
+    links:[[L.audible, L.amazonAu], [L.apple, L.spotify]] },
   { k:'podcasts', l:'Podcasts', imgClass:'podcasts', hint:'Position on Apple’s Top Podcasts chart', empty:'podcasts', metricName:'Apple Ranking',
-    links:[[L.applepod, L.spotify, L.ytpod, L.amzmusic]] },
+    links:[[L.applepod, L.spotify], [L.ytpod, L.amzmusic]] },
 ];
 const MONTHS = [1, 2, 3, 6, 12, 0];   // 0 = All
 const rankTip = () => months ? 'Rank among chart items launched in the last 12 months' : 'Rank on the current top 100 chart';
@@ -59,7 +58,7 @@ async function load(src, force) {
 
 const thumb = it => { const u = safeUrl(it.image); return u ? `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : '<div class="thumb-fallback">No Image</div>'; };
 const linkBtns = (it, S, cls) => S.links.map(g => `<div class="link-line">${g.map(f => f(it)).filter(x => safeUrl(x.u))
-  .map(x => `<a class="${cls}" href="${esc(safeUrl(x.u))}" target="_blank" rel="noopener noreferrer">${favIco(x.d)}${esc(x.l)} <span>↗</span></a>`).join('')}</div>`).join('');
+  .map(x => `<a class="${cls}" href="${esc(safeUrl(x.u))}" target="_blank" rel="noopener noreferrer" title="${esc(x.l)}">${favIco(x.d)}<span class="lbl"><span class="lf">${esc(x.l)}</span><span class="ls">${esc(x.s)}</span></span> <span>↗</span></a>`).join('')}</div>`).join('');
 const sub = it => it.author ? `<p class="author">${esc(it.author)}</p>` : '';
 
 function tileHtml(it, S) {

@@ -19,11 +19,11 @@ h1{font:700 clamp(26px,4vw,38px)/1 'Oswald',sans-serif;text-transform:uppercase;
 .tab-btn:hover{color:var(--text)}.tab-btn.active{background:var(--blue);color:#fff}
 .sortbox{display:flex;flex-wrap:wrap;gap:8px 16px}.sort{display:flex;align-items:center;gap:6px;font:12px 'IBM Plex Mono',monospace;color:var(--text-dim)}
 .count{font:12px 'IBM Plex Mono',monospace;color:var(--text-dim);margin:0 0 12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 .card{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.15s}
 .card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 8px 20px rgba(27,99,224,.12)}
 .thumb-wrap{position:relative;aspect-ratio:1/1;background:var(--panel);overflow:hidden;display:flex;align-items:center;justify-content:center}
-.thumb-wrap.books,.thumb-wrap.audiobooks{aspect-ratio:4/5}
+.thumb-wrap.books{aspect-ratio:3/4}
 .thumb-link{display:block;width:100%;height:100%}
 .thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block}
 .thumb-wrap.books img{object-fit:contain;padding:10px}
@@ -39,7 +39,11 @@ h1{font:700 clamp(26px,4vw,38px)/1 'Oswald',sans-serif;text-transform:uppercase;
 .desc.clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .more{align-self:flex-start;background:none;border:0;color:var(--blue);font-size:12px;padding:0;cursor:pointer}
 .links{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:4px}
-.link-line{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.links{width:100%}
+.link-line{display:flex;justify-content:center;gap:6px;width:100%}
+.link-line .open-link{flex:1 1 0;min-width:0;justify-content:center}
+.lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ls{display:none}
+.open-link>span:last-child,.row-link>span:last-child{flex:none}
 .open-link,.row-link{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:12px;font-weight:500;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:5px 8px}
 .open-link:hover,.row-link:hover{border-color:var(--blue);color:var(--blue)}
 .ico{width:16px;height:16px;border-radius:3px}
@@ -48,7 +52,7 @@ h1{font:700 clamp(26px,4vw,38px)/1 'Oswald',sans-serif;text-transform:uppercase;
 .rows-fav-section{margin-bottom:16px}
 .fav-box-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .fav-box-title{font:600 15px 'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.05em}.fav-box-count{margin-left:6px;color:var(--text-dim);font-weight:400}
-.fav-box-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.fav-box-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .empty{padding:40px;text-align:center;color:var(--text-dim);font:13px 'IBM Plex Mono',monospace}
 .rows-wrap{overflow-x:auto}.rows-table{min-width:1100px}
 .rows-header-row,.row-item{display:grid;grid-template-columns:34px 56px 52px minmax(160px,1.1fr) minmax(220px,2fr) 100px 100px minmax(180px,1.3fr);gap:12px;align-items:center;padding:8px 10px}
@@ -61,3 +65,12 @@ h1{font:700 clamp(26px,4vw,38px)/1 'Oswald',sans-serif;text-transform:uppercase;
 .row-date,.row-metric{font:12px 'IBM Plex Mono',monospace;color:var(--text-dim)}
 .row-links{display:flex;flex-direction:column;align-items:center;gap:5px}
 .foot{margin-top:28px;font-size:11.5px;line-height:1.5;color:var(--text-dim);max-width:1100px}
+
+@media (max-width:700px){
+header,main{padding-left:14px;padding-right:14px}
+.grid,.fav-box-items{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.fav-box{grid-column:1/-1!important}
+.open-link{font-size:10.5px;gap:4px;padding:5px 4px}.open-link .ico{width:14px;height:14px}
+.link-line{gap:4px}.lf{display:none}.ls{display:inline}
+.timeframes,.timeframes .tabs{width:100%}.timeframes .tab-btn{padding:6px 8px;font-size:11px}
+}
