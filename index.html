@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.8">
+<title>Books &amp; Audio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%93%9A%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="eyebrow-row">
+    <p class="eyebrow">Books &amp; Audio · Books · Audio Books · Podcasts</p>
+    <div class="updated-row"><span id="lastUpdated">Last updated: —</span><button class="refresh-btn" id="refreshBtn" type="button">Refresh</button></div>
+  </div>
+  <h1>Books &amp; Audio</h1>
+  <p class="sub">The top 100 books, audio books and podcasts on Apple&rsquo;s charts. Pick a source, choose when it launched (1, 2, 3, 6 or 12 months, or All), switch between tiles and rows, and sort by ranking or newest. Each item links out to Amazon, Audible, Spotify, YouTube and more.</p>
+</header>
+<main>
+  <div class="controls">
+    <div class="tabs sources" id="sources"></div>
+    <div class="timeframes"><div class="tabs" id="tabs"></div></div>
+    <div class="sortbox">
+      <div class="sort"><span>Layout</span>
+        <button class="sort-btn" data-layout="tile">Tiles</button>
+        <button class="sort-btn" data-layout="rows">Rows</button>
+      </div>
+      <div class="sort"><span>Sort</span>
+        <button class="sort-btn" data-sort="rank">Ranking</button>
+        <button class="sort-btn" data-sort="date">Newest</button>
+      </div>
+    </div>
+  </div>
+  <p class="count" id="count"></p>
+  <div id="out"></div>
+  <p class="foot">Data from Apple&rsquo;s free, keyless Marketing Tools charts and iTunes lookup API (books, audio books and podcasts, US store). Rank is the position among items launched in the last 12 months, so a 1 month view can show items like #34. All is the current top 100 chart whatever the launch date. Books and audio books use the publication date; podcasts use the date of the earliest episode found in the feed, and shows with very large feeds have no date so only appear under All. Amazon, Audible, Spotify, YouTube and other links are searches for the title, not guaranteed matches. These companies are not affiliated with this site.</p>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
