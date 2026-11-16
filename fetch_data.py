@@ -1,21 +1,33 @@
 #!/usr/bin/env python3
 """Builds data/books.json, data/audiobooks.json, data/podcasts.json from Apple's free, keyless charts + lookup API."""
-import json, re, sys, html, urllib.request, urllib.parse
+import json, re, sys, time, html, urllib.request, urllib.parse
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone, timedelta
 from email.utils import parsedate_to_datetime
 
 UA = {"User-Agent": "BooksAndAudio/1.0"}
 CHARTS = {
-    "books":      "https://rss.marketingtools.apple.com/api/v2/us/books/top-paid/100/books.json",
-    "audiobooks": "https://rss.marketingtools.apple.com/api/v2/us/audio-books/top/100/audio-books.json",
-    "podcasts":   "https://rss.marketingtools.apple.com/api/v2/us/podcasts/top/100/podcasts.json",
+    "books":      ["https://rss.marketingtools.apple.com/api/v2/us/books/top-paid/100/books.json",
+                   "https://rss.marketingtools.apple.com/api/v2/us/books/top-free/100/books.json"],
+    "audiobooks": ["https://rss.marketingtools.apple.com/api/v2/us/audio-books/top/100/audio-books.json"],
+    "podcasts":   ["https://rss.marketingtools.apple.com/api/v2/us/podcasts/top/100/podcasts.json"],
 }
 MONTHS = [1, 2, 3, 6, 12]
 
 def get(url, limit=None, timeout=25):
     with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
         return r.read(limit) if limit else r.read()
+
+def chart(urls):
+    """Try each chart URL up to 3 times (502s from Apple are usually temporary)."""
+    last = None
+    for u in urls:
+        for n in range(3):
+            try:
+                return json.loads(get(u))["feed"]["results"]
+            except Exception as e:
+                last = e; print("chart retry:", u.split("/us/")[1], e, file=sys.stderr); time.sleep(3 * (n + 1))
+    raise last
 
 def clean(s, n=600):
     s = html.unescape(re.sub(r"<[^>]+>", " ", s or ""))
@@ -51,7 +63,7 @@ def feed_info(url):
     return desc, (min(dates).date().isoformat() if dates and full else None)
 
 def build(key):
-    res = json.loads(get(CHARTS[key]))["feed"]["results"]
+    res = chart(CHARTS[key])
     ids = [str(r["id"]) for r in res]
     look = lookup(ids)
     items = []
