@@ -16,11 +16,11 @@ const L = {
 };
 const SOURCES = [
   { k:'books', l:'Books', imgClass:'books', hint:'Position on Apple’s Top Paid Books chart', empty:'books', metricName:'Apple Ranking',
-    links:[L.amazon, L.apple, L.goodreads, L.gbooks] },
+    links:[[L.amazon, L.gbooks], [L.apple, L.goodreads]] },
   { k:'audiobooks', l:'Audio Books', imgClass:'audiobooks', hint:'Position on Apple’s Top Audiobooks chart', empty:'audio books', metricName:'Apple Ranking',
-    links:[L.audible, L.apple, L.amazonAu, L.spotify, L.libro] },
+    links:[[L.audible, L.apple, L.amazonAu, L.spotify, L.libro]] },
   { k:'podcasts', l:'Podcasts', imgClass:'podcasts', hint:'Position on Apple’s Top Podcasts chart', empty:'podcasts', metricName:'Apple Ranking',
-    links:[L.applepod, L.spotify, L.ytpod, L.amzmusic] },
+    links:[[L.applepod, L.spotify, L.ytpod, L.amzmusic]] },
 ];
 const MONTHS = [1, 2, 3, 6, 12, 0];   // 0 = All
 const rankTip = () => months ? 'Rank among chart items launched in the last 12 months' : 'Rank on the current top 100 chart';
@@ -58,8 +58,8 @@ async function load(src, force) {
 }
 
 const thumb = it => { const u = safeUrl(it.image); return u ? `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : '<div class="thumb-fallback">No Image</div>'; };
-const linkBtns = (it, S, cls) => S.links.map(f => f(it)).filter(x => safeUrl(x.u))
-  .map(x => `<a class="${cls}" href="${esc(safeUrl(x.u))}" target="_blank" rel="noopener noreferrer">${favIco(x.d)}${esc(x.l)} <span>↗</span></a>`).join('');
+const linkBtns = (it, S, cls) => S.links.map(g => `<div class="link-line">${g.map(f => f(it)).filter(x => safeUrl(x.u))
+  .map(x => `<a class="${cls}" href="${esc(safeUrl(x.u))}" target="_blank" rel="noopener noreferrer">${favIco(x.d)}${esc(x.l)} <span>↗</span></a>`).join('')}</div>`).join('');
 const sub = it => it.author ? `<p class="author">${esc(it.author)}</p>` : '';
 
 function tileHtml(it, S) {
