@@ -19,7 +19,7 @@ h1{font:700 clamp(26px,4vw,38px)/1 'Oswald',sans-serif;text-transform:uppercase;
 .tab-btn:hover{color:var(--text)}.tab-btn.active{background:var(--blue);color:#fff}
 .sortbox{display:flex;flex-wrap:wrap;gap:8px 16px}.sort{display:flex;align-items:center;gap:6px;font:12px 'IBM Plex Mono',monospace;color:var(--text-dim)}
 .count{font:12px 'IBM Plex Mono',monospace;color:var(--text-dim);margin:0 0 12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
 .card{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.15s}
 .card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 8px 20px rgba(27,99,224,.12)}
 .thumb-wrap{position:relative;aspect-ratio:1/1;background:var(--panel);overflow:hidden;display:flex;align-items:center;justify-content:center}
@@ -48,7 +48,7 @@ h1{font:700 clamp(26px,4vw,38px)/1 'Oswald',sans-serif;text-transform:uppercase;
 .rows-fav-section{margin-bottom:16px}
 .fav-box-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .fav-box-title{font:600 15px 'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.05em}.fav-box-count{margin-left:6px;color:var(--text-dim);font-weight:400}
-.fav-box-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.fav-box-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .empty{padding:40px;text-align:center;color:var(--text-dim);font:13px 'IBM Plex Mono',monospace}
 .rows-wrap{overflow-x:auto}.rows-table{min-width:1100px}
 .rows-header-row,.row-item{display:grid;grid-template-columns:34px 56px 52px minmax(160px,1.1fr) minmax(220px,2fr) 100px 100px minmax(180px,1.3fr);gap:12px;align-items:center;padding:8px 10px}
