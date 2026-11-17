@@ -81,9 +81,9 @@ function tileHtml(it, S) {
 function rowHtml(it, S) {
   const url = safeUrl(it.url), key = favKey(it);
   return `<div class="row-item">
-    <label class="row-fav" title="Favorite"><input type="checkbox" class="fav-input" data-key="${esc(key)}" ${favs.has(key) ? 'checked' : ''}><span class="fav-star">★</span></label>
-    <div class="row-thumb">${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${thumb(it)}</a>` : thumb(it)}</div>
     <span class="row-rank" title="${esc(rankTip())}">${it.rank ? '#' + it.rank : '—'}</span>
+    <div class="row-thumb">${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${thumb(it)}</a>` : thumb(it)}</div>
+    <label class="row-fav" title="Favorite"><input type="checkbox" class="fav-input" data-key="${esc(key)}" ${favs.has(key) ? 'checked' : ''}><span class="fav-star">★</span></label>
     <span class="row-title">${esc(it.title)}<small>${esc(it.author || '')}</small></span>
     <span class="row-desc">${esc(it.desc || '—')}</span>
     <span class="row-date">${esc(fmtDate(it.date))}</span>
@@ -92,7 +92,7 @@ function rowHtml(it, S) {
   </div>`;
 }
 
-const rowsTableHtml = (list, S) => `<div class="rows-wrap"><div class="rows-table"><div class="rows-header-row"><span></span><span>Image</span><span>Rank</span><span>Name</span><span>Description</span><span>Launched</span><span>${esc(S.metricName)}</span><span>Links</span></div>${list.map(it => rowHtml(it, S)).join('')}</div></div>`;
+const rowsTableHtml = (list, S) => `<div class="rows-wrap"><div class="rows-table"><div class="rows-header-row"><span>Rank</span><span>Image</span><span></span><span>Name</span><span>Description</span><span>Launched</span><span>${esc(S.metricName)}</span><span>Links</span></div>${list.map(it => rowHtml(it, S)).join('')}</div></div>`;
 
 function favEntries(items) {
   const live = new Map((items || []).map(it => [it.id, it]));
