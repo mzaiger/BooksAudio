@@ -55,12 +55,6 @@ Each file looks like `{"updated": "<UTC timestamp>", "metric": "apple chart", "i
 
 `ranks` maps a window to the item's rank in it: `"0"` is All (the chart position), and `"1"`, `"2"`, `"3"`, `"6"` and `"12"` are the month windows. An item with no entry for a window isn't shown in that window.
 
-## Used by Trendslope
-
-Trendslope reads these three files straight from this repo (`raw.githubusercontent.com`) to make its Books & Audio tiles, which use items in the top 20 of each chart that have a date. It also shares the favorites saved here (`ba_favs`). Keep the three file names and the `items`, `metric`, `ranks` and `date` fields as they are.
-
-`index.html` ends with `<script src="/ts-embed.js"></script>`. That file lives in the root of the `marcitech.is-a.dev` base repo, not in this one. Inside Trendslope it lets the page sit under the Trendslope banner, and anywhere else it does nothing. On a host without that file the request just fails and the page works as normal.
-
 ## Files
 
 ```
