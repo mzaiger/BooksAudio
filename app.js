@@ -7,7 +7,7 @@ const L = {
   amazonAu:it => ({ l:'Amazon', s:'Amazon', d:'amazon.com', u:`https://www.amazon.com/s?k=${q(it)}&i=audible` }),
   audible: it => ({ l:'Audible', s:'Audible', d:'audible.com', u:`https://www.audible.com/search?keywords=${q(it)}` }),
   goodreads:it=> ({ l:'Goodreads', s:'Goodreads', d:'goodreads.com', u:`https://www.goodreads.com/search?q=${q(it)}` }),
-  barnes:  it => ({ l:'Barnes & Noble', s:'B&N', d:'barnesandnoble.com', u:`https://www.barnesandnoble.com/s/${q(it).replace(/%20/g, '+')}` }),
+  barnes:  it => ({ l:'Barnes & Noble', s:'B&N', d:'barnesandnoble.com', u:`https://www.barnesandnoble.com/search?q=${q(it)}` }),
   gbooks:  it => ({ l:'Google Books', s:'Google', d:'books.google.com', u:`https://www.google.com/books?q=${q(it)}` }),
   spotify: it => ({ l:'Spotify', s:'Spotify', d:'spotify.com', u:`https://open.spotify.com/search/${q(it)}` }),
   ytpod:   it => ({ l:'YouTube', s:'YouTube', d:'youtube.com', u:`https://www.youtube.com/results?search_query=${encodeURIComponent((it.title||'') + ' podcast')}` }),
