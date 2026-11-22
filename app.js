@@ -7,15 +7,16 @@ const L = {
   amazonAu:it => ({ l:'Amazon', s:'Amazon', d:'amazon.com', u:`https://www.amazon.com/s?k=${q(it)}&i=audible` }),
   audible: it => ({ l:'Audible', s:'Audible', d:'audible.com', u:`https://www.audible.com/search?keywords=${q(it)}` }),
   goodreads:it=> ({ l:'Goodreads', s:'Goodreads', d:'goodreads.com', u:`https://www.goodreads.com/search?q=${q(it)}` }),
+  barnes:  it => ({ l:'Barnes & Noble', s:'B&N', d:'barnesandnoble.com', u:`https://www.barnesandnoble.com/s/${q(it).replace(/%20/g, '+')}` }),
   gbooks:  it => ({ l:'Google Books', s:'Google', d:'books.google.com', u:`https://www.google.com/books?q=${q(it)}` }),
   spotify: it => ({ l:'Spotify', s:'Spotify', d:'spotify.com', u:`https://open.spotify.com/search/${q(it)}` }),
   ytpod:   it => ({ l:'YouTube', s:'YouTube', d:'youtube.com', u:`https://www.youtube.com/results?search_query=${encodeURIComponent((it.title||'') + ' podcast')}` }),
   amzmusic:it => ({ l:'Amazon Music', s:'Amazon', d:'music.amazon.com', u:`https://music.amazon.com/search/${q(it)}` }),
 };
-// Every tab shows its links on two lines of two (the full name on wide screens, a short name on phones)
+// Every tab shows its links on two lines of two, and Books adds a third line for Barnes & Noble (the full name on wide screens, a short name on phones)
 const SOURCES = [
   { k:'books', l:'Books', imgClass:'books', hint:'Position on Apple’s Top Paid Books chart', empty:'books', metricName:'Apple Ranking',
-    links:[[L.amazon, L.gbooks], [L.apple, L.goodreads]] },
+    links:[[L.amazon, L.gbooks], [L.apple, L.goodreads], [L.barnes]] },
   { k:'audiobooks', l:'Audio Books', imgClass:'audiobooks', hint:'Position on Apple’s Top Audiobooks chart', empty:'audio books', metricName:'Apple Ranking',
     links:[[L.audible, L.amazonAu], [L.apple, L.spotify]] },
   { k:'podcasts', l:'Podcasts', imgClass:'podcasts', hint:'Position on Apple’s Top Podcasts chart', empty:'podcasts', metricName:'Apple Ranking',
